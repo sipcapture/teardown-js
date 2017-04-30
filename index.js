@@ -1,10 +1,10 @@
 /**
  * TEARDOWN-js: SIP Teardown for Node.JS
- * 
+ *
  * Copyright (C) 2017 Lorenzo Mangani (SIPCAPTURE.ORG)
  * Copyright (C) 2017 QXIP BV (QXIP.NET)
  *
- * Project Homepage: http://github.com/sipcapture 
+ * Project Homepage: http://github.com/sipcapture
  *
  * This file is part of TEARDOWN-js
  *
@@ -12,14 +12,14 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * TEARDOWN-js is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
- * 
+ *
  **/
 
 var debug = false;
@@ -36,7 +36,7 @@ module.exports = {
 	}
   },
   send: function(HOST,PORT,sipmessage){
-	if (HOST && PORT) { 
+	if (HOST && PORT) {
 		return(sendUdp(HOST,PORT,sipmessage));
 	}
   },
@@ -50,27 +50,27 @@ module.exports = {
 	var termMessage = [];
 	var via;
 	var from, to, cseq, contact, toUser;
-	var obMessage = md.message.split("\r\n");                                                              
+	var obMessage = md.message.split("\r\n");
 	var route = [];
-	for(var hr in obMessage) 
+	for(var hr in obMessage)
 	{
 		var mm = obMessage[hr];
 		if (mm.startsWith("From")) { from = mm.split(/: (.+)/)[1]; }
 		else if(mm.startsWith("To")) { to = mm.split(/: (.+)/)[1]; }
-		else if(mm.startsWith("Contact")) { 
+		else if(mm.startsWith("Contact")) {
 			var str = mm.split(/: (.+)/)[1];
 			contact = str.substr(1).slice(0, -1);
-		} else if(mm.startsWith("CSeq")) { 
+		} else if(mm.startsWith("CSeq")) {
 			var tmpcseq = mm.split(/:(.+)/)[1];
-			cseq = parseInt(mm.split(' ')[1]);                                                                              
-		} else if(mm.startsWith("Via")) { 
+			cseq = parseInt(mm.split(' ')[1]);
+		} else if(mm.startsWith("Via")) {
 			via = mm;
-		} else if(mm.startsWith("Record-Route")) { 
+		} else if(mm.startsWith("Record-Route")) {
 			var str = mm.split(/: (.+)/)[1];
 			route.push("Route: " + str);
 		}
-	}                                                                          
-	var dataRoute = route.reverse(); 
+	}
+	var dataRoute = route.reverse();
 	var teardown_aleg = formMessage(from,to,callid,cseq,contact,via,dataRoute);
 	var teardown_bleg = formMessage(to,from,callid,cseq,contact,via,dataRoute);
 	return { aleg: teardown_aleg, bleg: teardown_bleg };
