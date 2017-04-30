@@ -1,6 +1,6 @@
 {
   "name": "teardown-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "SIP Teardown Generator",
   "main": "index.js",
   "scripts": {
