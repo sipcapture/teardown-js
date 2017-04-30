@@ -13,7 +13,7 @@ npm install teardown-js
 
 ### Example Usage:
 ```
-var mybye = teardownJS.teardown((from,to,callid,cseq,contact,via,route);
+var mybye = teardownJS.teardown(from,to,callid,cseq,contact,via,route);
 ```
 
 #### Example Result
