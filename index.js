@@ -41,6 +41,7 @@ module.exports = {
 	}
   },
   parse: function(md){
+	if (!md) { return {} };
 	var src_ip=md.source_ip;
 	var src_port=md.source_port;
 	var dst_ip=md.destination_ip;
