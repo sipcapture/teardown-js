@@ -3,7 +3,7 @@
 # teardown-js
 Generates a SIP BYE for Session Teardown provided key parameters.
 
-(C) 2017 QXUO BV, part of the HEPIC stack (http://hepic.tel)
+#### (C) 2017 QXIP BV, part of the HEPIC stack (http://hepic.tel)
 
 ### Install:
 ```
